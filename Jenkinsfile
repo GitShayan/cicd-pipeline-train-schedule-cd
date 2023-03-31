@@ -12,6 +12,11 @@ pipeline {
             when {
                 branch 'master'
             }
+// Look at here to refrence what paramete does the sshPublisher take: https://www.jenkins.io/doc/pipeline/steps/publish-over-ssh/
+// We set the username and password before in jenkins credentials and in the ID field we call it "webserver_login" .
+// We also setup the ip address for staging environment and Name it "staging" and production environment and Name it "production" in 
+// Manege jenkins > configure system > (publish over ssh section) SSH servers > add 
+// We can use "/" in the remote directory to access the whole system directory.
             steps {
                 withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                     sshPublisher(
